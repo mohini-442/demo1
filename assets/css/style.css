@@ -1,0 +1,38 @@
+.d-flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.min-100vh {
+  min-height: 100vh;
+}
+.flex-col {
+  flex-direction: column;
+}
+.gap-12 {
+  gap: 12px;
+}
+.inputbox {
+  border-radius: 5px;
+  background-color: aqua;
+  color: black;
+  padding: 12px 15px;
+  margin: 3px;
+  border: none;
+}
+.btn-1 {
+  background-color: black;
+  padding: 6px 18px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  margin: 12px;
+}
+.loginform {
+  padding-top: 44px;
+  text-align: center;
+}

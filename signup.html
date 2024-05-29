@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body>
+    <div class="min-100vh d-flex items-center justify-center flex-col">
+        <div>
+            <h2>Signup</h2>
+        </div>
+      <input type="text" id="name" placeholder="Name" class="inputbox" />
+      <input type="text" id="pswd" placeholder="pswd" class="inputbox" />
+      <input type="text" id="city" placeholder="city" class="inputbox" />
+      <input type="text" id="age" placeholder="age" class="inputbox" />
+      <button id="button" class="btn-1">signup</button>
+    </div>
+
+    <script>
+      const button = document.getElementById("button");
+      button.addEventListener("click", () => {
+        fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: document.getElementById("name").value,
+            pswd: document.getElementById("pswd").value,
+            city: document.getElementById("city").value,
+            age: document.getElementById("age").value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      });
+    </script>
+  </body>
+</html>

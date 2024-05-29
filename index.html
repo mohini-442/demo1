@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div>
+      <div id="text1"></div>
+      <div class="min-100vh d-flex items-center justify-center flex-col">
+        <!-- <input type="text" id="name" placeholder="Name" class="inputbox" />
+        <input type="text" id="pswd" placeholder="pswd" class="inputbox" />
+        <input type="text" id="city" placeholder="city" class="inputbox" />
+        <input type="text" id="age" placeholder="age" class="inputbox" />
+        <button id="button" class="btn-1">signup</button> -->
+
+        <div class="loginform">
+          <h2 style="text-align: center">Login</h2>
+          <div class="d-flex flex-col">
+            <input
+              type="text"
+              id="yourname"
+              placeholder="Name"
+              class="inputbox"
+            />
+            <input
+              type="text"
+              id="yourpass"
+              placeholder="pswd"
+              class="inputbox"
+            />
+          </div>
+          <button
+            id="btn2"
+            style="margin-left: auto; margin-right: auto"
+            class="btn-1"
+          >
+            login
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // const button = document.getElementById("button");
+      const button2 = document.getElementById("btn2");
+      // button.addEventListener("click", () => {
+      //   fetch("http://localhost:3000/signup", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       name: document.getElementById("name").value,
+      //       pswd: document.getElementById("pswd").value,
+      //       city: document.getElementById("city").value,
+      //       age: document.getElementById("age").value,
+      //     }),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((data) => console.log(data));
+      // });
+      button2.addEventListener("click", () => {
+        fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: document.getElementById("yourname").value,
+            pswd: document.getElementById("yourpass").value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            document.getElementById("text1").innerHTML = data.city;
+          });
+      });
+    </script>
+  </body>
+</html>

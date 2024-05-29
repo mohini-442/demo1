@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>changepswd</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div class="min-100vh d-flex items-center justify-center flex-col">
+      <div>
+        <h2>Change Password</h2>
+      </div>
+      <input type="text" id="name" placeholder="Name" class="inputbox" />
+      <input
+        type="text"
+        id="oldpass"
+        placeholder="Current Password"
+        class="inputbox"
+      />
+      <input
+        type="text"
+        id="newpass"
+        placeholder="New Password"
+        class="inputbox"
+      />
+      <button id="button" class="btn-1">changePswd</button>
+    </div>
+
+    <script>
+      const button = document.getElementById("button");
+      button.addEventListener("click", () => {
+        fetch("http://localhost:3000/changepass", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: document.getElementById("name").value,
+            pswd: document.getElementById("oldpass").value,
+            newpswd: document.getElementById("newpass").value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      });
+    </script>
+  </body>
+</html>
