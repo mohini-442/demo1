@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Listing with Image Upload</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      #productImage {
+        max-height: 300px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="container mt-5">
+        <h1 class="text-center mb-4">Product Listing</h1>
+        <div class="row">
+          <!-- Single Product with Image Upload -->
+          <div class="col-md-4 mx-auto">
+            <div class="card mb-4">
+              <img
+                id="productImage"
+                src="https://via.placeholder.com/300"
+                class="card-img-top w-100"
+                alt="Product Image"
+              />
+              <div class="card-body" id="id">
+                <h5 class="card-title">Product Name</h5>
+                <input type="text" id="productname" class="w-100" />
+                <h5 class="pt-2">Price</h5>
+                <input type="text" id="price" class="w-100" />
+                <h5 class="pt-2">Decription</h5>
+                <input type="text" id="description" class="w-100" />
+                <a href="#" class="btn btn-primary mt-2 mb-2" id="button"
+                  >Add to Cart</a
+                >
+                <input type="file" class="form-control-file" id="imageUpload" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript to Handle Image Upload -->
+    <script>
+      document
+        .getElementById("imageUpload")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById("productImage").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+    </script>
+    <script>
+      const button = document.getElementById("button");
+      button.addEventListener("click", () => {
+        fetch("http://localhost:3000/addproduct", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            img: document.getElementById("productImage").src,
+            name: document.getElementById("productname").value,
+            id: document.getElementById("id").value,
+            price: document.getElementById("price").value,
+            description: document.getElementById("description").value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      });
+    </script>
+  </body>
+</html>

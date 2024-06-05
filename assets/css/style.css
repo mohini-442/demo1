@@ -1,38 +1,76 @@
-.d-flex {
-  display: flex;
+* {
+  box-sizing: border-box !important;
+  text-decoration: none !important;
 }
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.min-100vh {
-  min-height: 100vh;
-}
-.flex-col {
-  flex-direction: column;
-}
+
 .gap-12 {
   gap: 12px;
 }
-.inputbox {
-  border-radius: 5px;
-  background-color: aqua;
-  color: black;
-  padding: 12px 15px;
-  margin: 3px;
-  border: none;
-}
-.btn-1 {
+.btn-1{
   background-color: black;
-  padding: 6px 18px;
-  border-radius: 5px;
+  border-radius: 10px;
+  padding: 9px 24px;
   color: white;
   border: none;
-  margin: 12px;
+  margin-top: 24px;
 }
 .loginform {
   padding-top: 44px;
   text-align: center;
+}
+
+/* card */
+
+.card {
+  width: 360px;
+  border-radius: 40px;
+  background-color: #feabae;
+  padding: 36px 30px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.ellipse1 {
+  position: absolute;
+  top: -14%;
+  left: 0%;
+  z-index: -1;
+}
+.ellipse2 {
+  position: absolute;
+  bottom: -16%;
+  right: 0%;
+  z-index: -1;
+}
+.inputbox {
+  border-radius: 16px;
+  background-color: #cb898b;
+  padding: 14px 28px;
+  border: none !important;
+  outline: none;
+  margin-top: 10px;
+  color: white;
+}
+::placeholder {
+  color: white;
+}
+.circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50px;
+  background-color: #8a4c7d;
+  border: none;
+}
+
+.line1{
+  position: relative;
+}
+.line1::before{
+  position: absolute;
+  bottom: 0%;
+  left: 0;
+  background-color: black;
+  height: 1px;
+  width: 100%;
 }
