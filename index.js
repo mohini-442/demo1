@@ -12,8 +12,8 @@ app.post("/signup", (req, res) => {
   var pswd = req.body.pswd;
   var city = req.body.city;
   var age = req.body.age;
-  var pin = red.body.pin;
-  var mail = red.body.mail;
+  var pin = req.body.pin;
+  var mail = req.body.mail;
 
   var users = {
     name,
@@ -25,14 +25,7 @@ app.post("/signup", (req, res) => {
     purchased: [],
   };
   user.push(users);
-  res.json({
-    name,
-    pswd,
-    city,
-    age,
-    mail,
-    pin,
-  });
+  res.json({ user });
 });
 
 app.post("/login", (req, res) => {
@@ -113,6 +106,8 @@ app.post("/sellerlogin", (req, res) => {
   res.json({ message: "user not found" });
 });
 
+var products = [];
+
 app.post("/addproduct", (req, res) => {
   var name = req.body.name;
   var price = req.body.price;
@@ -126,7 +121,7 @@ app.post("/addproduct", (req, res) => {
     id,
     img,
   };
-  seller.push(users);
+  products.push(users);
   res.json({
     name,
     price,
@@ -136,28 +131,57 @@ app.post("/addproduct", (req, res) => {
   });
 });
 
+// app.post("/purchased", (req, res) => {
+//   const name = req.body.name;
+//   const pswd = req.body.pswd;
+//   const itemid = req.body.itemid;
+//   console.log({ name, pswd, itemid});
+//   for (let i = 0; i < user.length; i++) {
+//     if (user[i].name === name) {
+//       if (user[i].pswd === pswd)
+//         for (let g = 0; g < user.length; g++) {
+//           if (products[g].name === itemid) {
+//             user[g].purchased.push(products[g]);
+//             res.json(user[g]);
+//             return;
+//           }
+//         }
+//     }
+//   }
+//   res.json({ message: "seller not found" });
+// });
+
 app.post("/purchased", (req, res) => {
-  const name = req.body.name;
-  const pswd = req.body.pswd;
-  const itemid = req.body.itemid;
-  for (let i = 0; i < products.length; i++) {
+  const { name, pswd, itemid } = req.body;
+  console.log("Received data:", { name, pswd, itemid });
+
+  let userFound = false;
+  let productFound = false;
+
+  for (let i = 0; i < user.length; i++) {
     if (user[i].name === name) {
-      if (user[i].pswd === pswd)
+      userFound = true;
+      console.log(name);
+      if (user[i].pswd === pswd) {
+        console.log(pswd);
         for (let g = 0; g < products.length; g++) {
-          if (products[g].name === itemid) {
-            user[g].purchased.push(products[g]);
-            res.json(user[g]);
+          console.log(products);
+          if (products[g].id == itemid) {
+            productFound = true;
+            console.log(products);
+            user[i].purchased.push(products[g]);
+            res.json(user[i]);
+            return;
           }
         }
-    } else {
-      res.json("user not found");
+      }
     }
   }
-  res.json({ massage: "seller not found" });
+  res.json({ message: "product not found" });
 });
 
 app.get("/getproduct", (req, res) => {
-  res.json(seller);
+  res.json(products);
 });
 
 app.listen(port, () => {

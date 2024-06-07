@@ -55,6 +55,7 @@
 
     <!-- JavaScript to Handle Image Upload -->
     <script>
+      let productId = 1;
       document
         .getElementById("imageUpload")
         .addEventListener("change", function (event) {
@@ -79,7 +80,7 @@
           body: JSON.stringify({
             img: document.getElementById("productImage").src,
             name: document.getElementById("productname").value,
-            id: document.getElementById("id").value,
+            id: productId++,
             price: document.getElementById("price").value,
             description: document.getElementById("description").value,
           }),
