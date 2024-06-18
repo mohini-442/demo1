@@ -15,6 +15,7 @@ app.post("/signup", (req, res) => {
   var pin = req.body.pin;
   var mail = req.body.mail;
 
+  
   var users = {
     name,
     pswd,
